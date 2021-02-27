@@ -1,4 +1,7 @@
+import 'reflect-metadata';
 import express, { request, response } from "express";
+import "./database";
+import { router } from './routes';
 
 const app = express();
 
@@ -12,16 +15,7 @@ const app = express();
 
 // http://localhost:3333/users
 
-app.get("/", (request, response) => {
-    return response.json({ message: "Hello World - NLW04" });
-});
-
-// 1 parametro => rota(Recurso da API)
-// 2 parametro => request, response
-
-app.post("/", (request, response) => {
-    // Recebeu os dados para salvar
-    return response.json({ message: "Dados Salvos" });
-});
+app.use(express.json());
+app.use(router);
 
 app.listen(3333, () => console.log("Sevidor online"));
